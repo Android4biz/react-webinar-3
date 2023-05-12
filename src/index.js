@@ -5,19 +5,21 @@ import App from "./app.js";
 import Store from "./store.js";
 import { counter } from "./counter.js";
 
-console.log(counter)
-
 const store = new Store({
-  list: [
-    {code: counter(), title: 'Название элемента', count: 0},
-    {code: counter(), title: 'Некий объект', count: 0},
-    {code: counter(), title: 'Заголовок', count: 0},
-    {code: counter(), title: 'Очень длинное название элемента из семи слов', count: 0},
-    {code: counter(), title: 'Запись', count: 0},
-    {code: counter(), title: 'Шестая запись', count: 0},
-    {code: counter(), title: 'Седьмая запись', count: 0},
-  ]
-})
+    list: [
+        { code: counter(), title: "Название элемента", count: 0 },
+        { code: counter(), title: "Некий объект", count: 0 },
+        { code: counter(), title: "Заголовок", count: 0 },
+        {
+            code: counter(),
+            title: "Очень длинное название элемента из семи слов",
+            count: 0
+        },
+        { code: counter(), title: "Запись", count: 0 },
+        { code: counter(), title: "Шестая запись", count: 0 },
+        { code: counter(), title: "Седьмая запись", count: 0 }
+    ]
+});
 
 const root = createRoot(document.getElementById("root"));
 
