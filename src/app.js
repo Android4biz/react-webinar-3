@@ -47,10 +47,11 @@ function App({ store }) {
                                         {item.title}
                                     </div>
                                     <div className="Item-title">
-                                        {item.count > 0 &&
-                                            <div className="alocate">
-                                                | Выделяли {item.count} раз
-                                            </div>}
+                                        {item.selected
+                                            ? <div className="alocate">
+                                                  | Выделяли {item.count} раз
+                                              </div>
+                                            : ""}
                                     </div>
                                 </div>
                                 <div className="Item-actions">

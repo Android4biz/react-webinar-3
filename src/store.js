@@ -41,10 +41,10 @@ class Store {
     /**
    * Добавление новой записи
    */
-    addItem({ code, title='title', count=0 }) {
+    addItem({ code, title = "title", count = 0, selected = false }) {
         this.setState({
             ...this.state,
-            list: this.state.list.concat({ code, title, count })
+            list: this.state.list.concat({ code, title, count, selected })
         });
     }
     /**\
@@ -67,7 +67,7 @@ class Store {
             list: this.state.list.map(item => {
                 if (item.code === code) {
                     item.selected = !item.selected;
-                    item.count++;
+                    item.selected ? item.count++ : false;
                 } else {
                     item.selected = false;
                 }
