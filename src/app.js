@@ -21,7 +21,7 @@ function App({ store }) {
                         const code = counter();
                         store.addItem({
                             code,
-                            title: `Новая запись`
+                            title: `Новая запись`,
                         });
                     }}
                 >
@@ -47,11 +47,10 @@ function App({ store }) {
                                         {item.title}
                                     </div>
                                     <div className="Item-title">
-                                        {item.selected
-                                            ? <div className="alocate">
-                                                  | Выделяли {item.count} раз
-                                              </div>
-                                            : ""}
+                                        {item.count > 0 &&
+                                            <div className="alocate">
+                                                | Выделяли {item.count} раз
+                                            </div>}
                                     </div>
                                 </div>
                                 <div className="Item-actions">
