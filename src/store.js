@@ -1,3 +1,5 @@
+import { generateCode } from "./utils";
+
 /**
  * Хранилище состояния приложения
  */
@@ -35,46 +37,29 @@ class Store {
     setState(newState) {
         this.state = newState;
         // Вызываем всех слушателей
-        for (const listener of this.listeners) listener();
+        for (const listener of this.listeners) listener()
     }
 
     /**
    * Добавление новой записи
    */
-    addItem({ code, title = "title", count = 0, selected = false }) {
+
+    addItem(item) {
         this.setState({
             ...this.state,
-            list: this.state.list.concat({ code, title, count, selected })
-        });
+            cart: [...this.state.cart, this.state.list.find(it => item !== it.code)],
+        })
     }
-    /**\
+
+    /**
    * Удаление записи по коду
    * @param code
    */
-    deleteItem(code) {
-        this.setState({
-            ...this.state,
-            list: this.state.list.filter(item => item.code !== code)
-        });
-    }
+  
     /**
    * Выделение записи по коду
    * @param code
    */
-    selectItem(code) {
-        this.setState({
-            ...this.state,
-            list: this.state.list.map(item => {
-                if (item.code === code) {
-                    item.selected = !item.selected;
-                    item.selected ? item.count++ : false;
-                } else {
-                    item.selected = false;
-                }
-                return item;
-            })
-        });
-    }
 }
 
 export default Store;

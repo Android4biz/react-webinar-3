@@ -1,74 +1,41 @@
-import React from "react";
-import { createElement } from "./utils.js";
-import "./styles.css";
-import { counter } from "./counter.js";
+// @ts-nocheck
+import React, { useCallback, useState } from "react";
+import List from "./components/list";
+// import Controls from "./components/controls";
+import Head from "./components/head";
+import PageLayout from "./components/page-layout";
+import Cart from "./components/cart";
+
 /**
  * Приложение
  * @param store {Store} Хранилище состояния приложения
  * @returns {React.ReactElement}
  */
-function App({ store }) {
-    const list = store.getState().list;
 
-    return (
-        <div className="App">
-            <div className="App-head">
-                <h1>Приложение на чистом JS</h1>
-            </div>
-            <div className="App-controls">
-                <button
-                    onClick={() => {
-                        const code = counter();
-                        store.addItem({
-                            code,
-                            title: `Новая запись`,
-                        });
-                    }}
-                >
-                    Добавить
-                </button>
-            </div>
-            <div className="App-center">
-                <div className="List">
-                    {list.map(item =>
-                        <div key={item.code} className="List-item">
-                            <div
-                                className={
-                                    "Item" +
-                                    (item.selected ? " Item_selected" : "")
-                                }
-                                onClick={() => store.selectItem(item.code)}
-                            >
-                                <div className="left-block">
-                                    <div className="Item-code">
-                                        {item.code}
-                                    </div>
-                                    <div className="Item-title">
-                                        {item.title}
-                                    </div>
-                                    <div className="Item-title">
-                                        {item.count > 0 &&
-                                            <div className="alocate">
-                                                | Выделяли {item.count} раз
-                                            </div>}
-                                    </div>
-                                </div>
-                                <div className="Item-actions">
-                                    <button
-                                        className="btn"
-                                        onClick={() =>
-                                            store.deleteItem(item.code)}
-                                    >
-                                        Удалить
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    )}
-                </div>
-            </div>
-        </div>
-    );
+function App({ store }) {
+	const cart = store.getState().cart
+    const list = store.getState().list
+    // console.log(item)
+    // const [cartProduct, setCartProduct] = useState([])
+
+    // const handleClick = (item) => {
+    //     setCartProduct([...cartProduct, item])
+    // }
+
+    const callbacks = {
+        onAddItem: useCallback(
+            () => {
+                store.addItem();
+            },
+            [store]
+        ),
+    };
+
+    return <PageLayout>
+            <Head title="Приложение на чистом JS" />
+            <Cart cart={cart} />
+            <List list={list} onAddItem={callbacks.onAddItem} />
+        </PageLayout>
 }
 
-export default App;
+export default App

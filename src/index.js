@@ -1,31 +1,29 @@
-import React from "react";
-import { createRoot } from "react-dom/client";
-import { createElement } from "./utils.js";
-import App from "./app.js";
-import Store from "./store.js";
-import { counter } from "./counter.js";
+import React from 'react';
+import {createRoot} from 'react-dom/client';
+import {generateCode} from './utils.js';
+import App from './app.js';
+import Store from './store.js';
 
 const store = new Store({
-    list: [
-        { code: counter(), title: "Название элемента", count: 0 },
-        { code: counter(), title: "Некий объект", count: 0 },
-        { code: counter(), title: "Заголовок", count: 0 },
-        {
-            code: counter(),
-            title: "Очень длинное название элемента из семи слов",
-            count: 0
-        },
-        { code: counter(), title: "Запись", count: 0 },
-        { code: counter(), title: "Шестая запись", count: 0 },
-        { code: counter(), title: "Седьмая запись", count: 0 }
-    ]
+  list: [
+    {code: generateCode(), title: 'Название товара', price: 100.0},
+    {code: generateCode(), title: 'Книга про React', price: 770},
+    {code: generateCode(), title: 'Конфета', price: 33},
+    {code: generateCode(), title: 'Трактор', price: 7955320},
+    {code: generateCode(), title: 'Телефон iPhone XIXV', price: 120000},
+    {code: generateCode(), title: 'Карандаши цветные', price: 111},
+    {code: generateCode(), title: 'Товар сюрприз', price: 0},
+  ],
+  cart: [
+    
+  ]
 });
 
-const root = createRoot(document.getElementById("root"));
+const root = createRoot(document.getElementById('root'));
 
 store.subscribe(() => {
-    root.render(<App store={store} />);
+  root.render(<App store={store}/>);
 });
 
 // Первый рендер приложения
-root.render(<App store={store} />);
+root.render(<App store={store}/>);
